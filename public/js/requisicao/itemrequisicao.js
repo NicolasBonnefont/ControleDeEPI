@@ -156,10 +156,8 @@ function itensTabela() {
     })
     $table.bootstrapTable('refresh')
     itens.push($table.bootstrapTable('getData'))
-    sessionStorage.setItem('itens',JSON.stringify(itens))
-    console.log(itens)
+    sessionStorage.setItem('itens',JSON.stringify(itens))   
   })
-
 
   $(function () {
     $button.click(function () {
@@ -193,6 +191,7 @@ function itensTabela() {
         })
       }
       itens = JSON.stringify($table.bootstrapTable('getData'))
+      console.log(itens)
       sessionStorage.setItem('itens', itens)
       document.getElementById("selectEPI").selectedIndex = 0
       document.getElementById('descricaoEquipamentos').value = '',
