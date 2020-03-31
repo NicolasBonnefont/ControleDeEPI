@@ -51,8 +51,8 @@ Route.get('/requisicao/:id','RequisicaoController.show')
 Route.put('/requisicao/:id','RequisicaoController.update')
 
 // PARTE DOS ITENS DA REQUISICAO DO EPI
-Route.post('/itemrequisicao','ItemrequisicaoController.store')
-Route.get('/itemrequisicao/:id','ItemrequisicaoController.show')
+Route.post('/itemrequisicao','ItemRequisicaoController.store')
+Route.get('/itemrequisicao/:id','ItemRequisicaoController.show')
 
 // ROTA CORINGA PARA MOSTRAR CASO NAO ENCONTRE AS DEMAIS
 Route.on('*').render('pag/404') 
