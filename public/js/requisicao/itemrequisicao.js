@@ -186,7 +186,7 @@ function itensTabela() {
             CodEquipamento: epi,
             DescricaoEquipamento: document.getElementById('descricaoEquipamentos').value,
             TipoEquipamento: document.getElementById('tipoDoEquipamento').value,
-            quantidade: document.getElementById('quantidade').value
+            Quantidade: document.getElementById('quantidade').value
           }
         })
       }
