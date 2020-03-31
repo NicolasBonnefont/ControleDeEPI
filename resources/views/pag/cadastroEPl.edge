@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../css/Cadastros/CadastroEPI.css" rel="stylesheet" />
+  <title>Cadastro de EPI</title>
+</head>
+
+@include('nav/nav')
+
+<div class="card card-nav-tabs card-plain container custom">
+  <div class="card-header card-header-danger">
+    <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+    <div class="nav-tabs-navigation">
+      <div class="nav-tabs-wrapper">
+        <ul class="nav nav-tabs" data-tabs="tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#Cadastrar" onclick="limparCampos()" data-toggle="tab">Cadastrar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#Alterar" onclick="limparCampos()" data-toggle="tab">Alterar</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="tab-content text-center">
+      <div class="tab-pane active" id="Cadastrar">
+        <div class="card container">
+          <form onsubmit="cadastrarEPI()" id="formCadastro">
+            <br>
+            <div class="form-row">
+              <div class="form-group col-sm-6 ">
+                <label>Descrição Interno :</label>
+                <input type="text" class="form-control" id="DescricaoInterno" required>
+              </div>
+              <div class="form-group col-sm-6">
+                <label for="inputPassword4">Descrição MinTrabalho :</label>
+                <input type="text" class="form-control" id="DescricaoMinTrabalho" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <br>
+                <select id="selectTipo" class="form-control" required>
+                  <option></option>
+                  <option>EPI</option>
+                  <option>UNIFORME</option>
+                  <option>HIGIENE</option>
+                </select>
+                <p>Tipo</p>
+              </div>
+              <div class="form-group col-md-3">
+                <br>
+                <select id="selectAgentes" class="form-control" onchange="igualaRiscos()" required>
+                  <option></option>
+                  <option>FRIO</option>
+                  <option>CALOR</option>
+                  <option>UMIDADE</option>
+                  <option>RUIDO</option>
+                  <option>MANIPULAÇÃO DE ALIMENTOS</option>
+                  <option>VIRUS,BACTERIAS</option>
+                  <option>VIRUS,BACTERIAS E ACAROS</option>
+                  <option>AGENTES SANEANTES</option>
+                </select>
+                <p>Agente</p>
+              </div>
+              <div class="form-group col-md-6">
+                <br>
+                <select id="selectRiscos" class="form-control" disabled>
+                  <option></option>
+                </select>
+                <p>Riscos</p>
+              </div>
+
+            </div>
+
+
+            <div class="form-group col-sm-12">
+              <label></label>
+              <select id="selectSetor" class="form-control" required>
+                <option></option>
+              </select>
+              <p>Setor</p>
+            </div>
+            <br>
+
+
+            <div class="card">
+              <div class="card-header card-header-primary">
+                <h4 class="card-title"> Selecione os Departamentos</h4>
+              </div>
+              <div class="card-body ">
+                <!--- DEPARTAMENTO-->
+                <div id="checkbox" class="row container" onchange="mudaCheckbox()"></div>
+
+              </div>
+            </div>
+            <br>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- PARTE DA ALTERAÇÃO-->
+      <div class="tab-pane" id="Alterar">
+        <div class="card container">
+
+          <div class="form-group col-md-6">
+            <br>
+            <select id="selectEPIAltera" class="form-control" onchange="buscarEPI()" required>
+              <option>Selecione um EPI para alterar...</option>
+            </select>
+            <p></p>
+          </div>
+
+          <br>
+          <form onsubmit="alterarEPI()" id="formAltera">
+            <fieldset id="composAltera" disabled>
+              <div class="form-row">
+                <div class="form-group col-sm-6 ">
+                  <label>Descrição Interno :</label>
+                  <input type="text" class="form-control" id="DescricaoInternoAltera" required>
+                </div>
+                <div class="form-group col-sm-6">
+                  <label for="inputPassword4">Descrição MinTrabalho :</label>
+                  <input type="text" class="form-control" id="DescricaoMinTrabalhoAltera" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-3">
+                  <br>
+                  <select id="selectTipoAltera" class="form-control" required>
+                    <option></option>
+                    <option>EPI</option>
+                    <option>UNIFORME</option>
+                    <option>HIGIENE</option>
+                  </select>
+                  <p>Tipo</p>
+                </div>
+                <div class="form-group col-md-3">
+                  <br>
+                  <select id="selectAgentesAltera" class="form-control" onchange="igualaRiscosAltera()" required>
+                    <option></option>
+                    <option>FRIO</option>
+                    <option>CALOR</option>
+                    <option>UMIDADE</option>
+                    <option>RUIDO</option>
+                    <option>MANIPULAÇÃO DE ALIMENTOS</option>
+                    <option>VIRUS,BACTERIAS</option>
+                    <option>VIRUS,BACTERIAS E ACAROS</option>
+                    <option>AGENTES SANEANTES</option>
+                  </select>
+                  <p>Agente</p>
+                </div>
+                <div class="form-group col-md-6">
+                  <br>
+                  <select id="selectRiscosAltera" class="form-control" disabled>
+                    <option></option>
+                  </select>
+                  <p>Riscos</p>
+                </div>
+              </div>
+
+
+              <div class="form-group col-sm-12">
+                <label></label>
+                <select id="selectSetorAltera" class="form-control" required>
+                  <option></option>
+                </select>
+                <p>Setor</p>
+              </div>
+
+              <br>
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title"> Selecione os Departamentos</h4>
+                </div>
+                <div class="card-body ">
+                  <!--- DEPARTAMENTO-->
+                  <div id="checkboxAltera" class="row container" onchange="mudaCheckboxAltera()"></div>
+                </div>
+              </div>
+
+              <fieldset>
+          </form>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Alterar</button>
+            <button type="button" class="btn btn-danger" onclick="excluirEPI()">Excluir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="../js/cadastro/cadastroEP.js" type="text/javascript"></script>

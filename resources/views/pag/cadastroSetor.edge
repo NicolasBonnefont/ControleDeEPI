@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../css/Cadastros/CadastroSetor.css" rel="stylesheet" />
+  <title>Cadastro de Setor</title>
+</head>
+
+
+@include('nav/nav')
+
+
+<div class="card card-nav-tabs card-plain container custom">
+  <div class="card-header card-header-danger">
+    <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+    <div class="nav-tabs-navigation">
+      <div class="nav-tabs-wrapper">
+        <ul class="nav nav-tabs" data-tabs="tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#Cadastrar" data-toggle="tab">Cadastrar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#Alterar" data-toggle="tab">Alterar</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card-body container ">
+    <div class="tab-content text-center">
+      <div class="tab-pane active" id="Cadastrar">
+        <div class="card container">
+          <form onsubmit="cadastrarSetor()" id="formCadastro">
+            <br>
+            <div class="form-group col-sm-4">
+              <input type="text" class="form-control" id="Descricao" required>
+              <p>Descrição do Setor</p>
+            </div>
+            <br>
+            <div class="col-sm-2">
+              <button type="submit" class=" btn btn-primary">Cadastrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- PARTE DA ALTERAÇÃO-->
+      <div class="tab-pane" id="Alterar">
+        <div class="card container">          
+          <div class="input-group col-sm-4 custom">            
+           <select id="SelectSetor" class="form-control" onchange="igualaSetor()">
+             <option>Selecione o Setor...</option> 
+           </select>   
+               
+          </div>
+
+          <br>
+          <form onsubmit="alterarSetor()" id="formAltera">
+            <fieldset id="campos" disabled>
+              <div class="form-group col-sm-6">                
+                <input type="text" class="form-control" id="DescricaoAltera" required>
+                <p>Descrição do Setor</p>
+              </div>
+              <br>
+              <div class="col-sm-4">
+                <button type="submit" class=" btn btn-primary">Alterar</button>
+                <button type="button" onclick="excluirSetor()" class=" btn btn-danger">Excluir</button>
+              </div>
+              <fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="../js/cadastro/CadastroSetor.js" type="text/javascript"></script>
