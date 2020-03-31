@@ -311,39 +311,10 @@ async function alterarEPI() {
   console.log(data)
   await axios.put('/epi/' + epi, data)
     .then(function (response) {
-      console.log(response)
-      Swal.fire({
-        allowOutsideClick: false,
-        position: 'center',
-        icon: 'success',
-        title: 'EPI alterado com sucesso !',
-        showConfirmButton: false,
-        timer: 1800
-
-      }).then((result) => {
-
-        if (result.dismiss === Swal.DismissReason.timer) {
-          location.reload()
-        }
-      })
 
     })
     .catch(function (erro) {
       console.log(erro)
-      Swal.fire({
-        allowOutsideClick: false,
-        position: 'center',
-        icon: 'error',
-        title: 'Problema na alteração, verificar o log !',
-        showConfirmButton: false,
-        timer: 1800
-
-      }).then((result) => {
-
-        if (result.dismiss === Swal.DismissReason.timer) {
-          limparCampos()
-        }
-      })
     })
 
     mudaCheckboxAltera()

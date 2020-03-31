@@ -51,7 +51,7 @@ class EpisDepartamentoController {
       const idEpi = await request.only('idEpi')
       const {idDepartamento} = request.all()
       
-      await Database.from('epis_departamentos').where('idEpi', '=', idEpi).delete()
+      await Database.from('epis_departamentos').where(idEpi).delete()
       
       for (var i = 0; i < idDepartamento.length; i++) {
 
@@ -113,10 +113,10 @@ class EpisDepartamentoController {
   async update({ params, request, response }) {
 
     const idEpi = await request.only('idEpi')
-    const { idDepartamento } = request.all()
-
-    await Database.from('epis_departamentos').where('idEpi', '=', idEpi).delete()
-
+    const { idDepartamento } = await request.all()
+    
+    await Database.from('epis_departamentos').where(idEpi).delete()
+    
     for (var i = 0; i < idDepartamento.length; i++) {
 
       var departamento = { "idDepartamento": idDepartamento[i] }
