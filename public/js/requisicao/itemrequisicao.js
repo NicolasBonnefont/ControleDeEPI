@@ -41,12 +41,13 @@ async function carregaFuncionario() {
   for (var i = 0; i < dados.length; i++) {
     var selectFuncionario = document.getElementById("selectFuncionario")
     var option = document.createElement("option")
-    option.text = 'Codigo: ' + dados[i].Codigo + ' - ' + dados[i].Nome
+    option.text = dados[i].Nome
     option.value = dados[i].Codigo
     selectFuncionario.add(option)
   }
 }
 carregaFuncionario()
+
 async function carregaEPI() {
   var dados
   await axios.get('/epi')
@@ -59,7 +60,7 @@ async function carregaEPI() {
   for (var i = 0; i < dados.length; i++) {
     var selectEPI = document.getElementById("selectEPI")
     var option = document.createElement("option")
-    option.text = 'Codigo: ' + dados[i].id + ' - ' + dados[i].DescricaoInterno
+    option.text = dados[i].DescricaoInterno
     option.value = dados[i].id
     selectEPI.add(option)
   }

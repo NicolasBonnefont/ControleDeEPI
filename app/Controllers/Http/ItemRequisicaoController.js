@@ -49,7 +49,7 @@ class ItemRequisicaoController {
     const id = await request.only('id')
     const {Itens} = await request.all() // idPainel = itens // numero = idUsuario
 
-    await Database.from('itemrequisicoes').where('id','=',id).delete()
+    await Database.from('itemrequisicoes').where(id).delete()
 
     for(var i = 0; i < Itens.length; i++){
         
