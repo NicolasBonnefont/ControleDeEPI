@@ -26,7 +26,7 @@ class FuncionarioController {
 
     const data = await Database.select('Codigo', 'Nome', 'Referencia')
     .from('funcionarios')
-    .where('referencia', '=', referencia)
+    .where('referencia', '=', '202002')
 
 
     return data
