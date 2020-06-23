@@ -1,0 +1,6 @@
+.icones{
+  display: flex;
+}
+.icones a {
+  margin: 3px;
+}
