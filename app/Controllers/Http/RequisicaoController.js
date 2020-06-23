@@ -8,6 +8,7 @@
  * Resourceful controller for interacting with requisicaos
  */
 const Requisicao = use('App/Models/Requisicoes')
+const Database = use('Database')
 class RequisicaoController {
   /**
    * Show a list of all requisicaos.
@@ -18,7 +19,7 @@ class RequisicaoController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
+  async index({ request, response, view }) {
 
     const data = await Requisicao.all()
 
@@ -34,7 +35,7 @@ class RequisicaoController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async create ({ request, response, view }) {
+  async create({ request, response, view }) {
   }
 
   /**
@@ -45,12 +46,12 @@ class RequisicaoController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store({ request, response }) {
 
     const data = await request.all()
 
-    
-    const requisicao = await  Requisicao.create(data)
+
+    const requisicao = await Requisicao.create(data)
 
     return requisicao
   }
@@ -64,7 +65,7 @@ class RequisicaoController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
+  async show({ params, request, response, view }) {
 
     const requisicao = await Requisicao.findByOrFail('id', params.id)
 
@@ -81,7 +82,7 @@ class RequisicaoController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async edit ({ params, request, response, view }) {
+  async edit({ params, request, response, view }) {
   }
 
   /**
@@ -92,16 +93,16 @@ class RequisicaoController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
-    
-      const data = await request.all()
-      
-      const requisicao = await Requisicao.findByOrFail('id',params.id)
-   
-      await requisicao.merge(data)
-      await requisicao.save()
-    
-      return requisicao
+  async update({ params, request, response }) {
+
+    const data = await request.all()
+
+    const requisicao = await Requisicao.findByOrFail('id', params.id)
+
+    await requisicao.merge(data)
+    await requisicao.save()
+
+    return requisicao
 
 
   }
@@ -114,7 +115,20 @@ class RequisicaoController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
+  async destroy({ params, request, response }) {
+
+    console.log(params.id)
+    try {
+      await Database.from('requisicoes').where('id', params.id).delete()
+      await Database.from('itemrequisicoes').where('id',params.id).delete()
+
+      return response.status(200).send({Mensagem:"Requisição deletado com sucesso !"})
+    } catch (err) {
+      return err
+
+
+    }
+
   }
 }
 

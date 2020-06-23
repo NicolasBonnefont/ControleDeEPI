@@ -132,7 +132,7 @@ async function cadastrarEPI() {
 
     var dados = JSON.parse(local)
     var IdDepartamento = [...dados]
-    
+
     await axios.post('/epidepartamento',
       {
         "idEpi": sessionStorage.getItem('idEpi'),
@@ -167,7 +167,7 @@ async function cadastrarEPI() {
         }).then((result) => {
 
           if (result.dismiss === Swal.DismissReason.timer) {
-            document.getElementById('formCadastro').reset()           
+            document.getElementById('formCadastro').reset()
           }
         })
       })
@@ -208,7 +208,7 @@ function igualaRiscosAltera() {
 }
 async function buscarEPI() {
 
-  
+
   var epiIndex = document.getElementById("selectEPIAltera").selectedIndex;
   var epiOption = document.getElementById("selectEPIAltera").options;
   var epi = epiOption[epiIndex].value
@@ -237,37 +237,37 @@ async function buscarEPI() {
         agentesoption[0].text = response.data.Agentes
         riscosoption[0].text = response.data.Riscos
         setoroption[0].text = response.data.Setor
-       
+
       })
       .catch(function (erro) {
         console.log(erro)
 
       })
-  
+
   await axios.get('/epidepartamento/' + sessionStorage.getItem('idEpi'))
   .then(function (response) {
     var inputs = document.querySelectorAll(".checkboxAltera")
-    
+
     var count1 = 0
     var count2 = 0
 
     while (count1 <= inputs.length) { //7
-      
-      while (count2 <= response.data.epi.length) {     //3      
-        
+
+      while (count2 <= response.data.epi.length) {     //3
+
         if (inputs[count1].value == response.data.epi[count2].idDepartamento) {
 
           inputs[count1].checked = true
 
-          count2++ 
-       
+          count2++
+
         }
         count1++ //6
       }
-      
-    } 
 
-  })   
+    }
+
+  })
 }
   if (epiIndex === 0) {
     limparCampos()
@@ -322,10 +322,10 @@ async function alterarEPI() {
     var local = sessionStorage.getItem('CodDepartamentos')
 
     if (local) {
-  
+
       var dados = JSON.parse(local)
       var IdDepartamento = [...dados]
-      
+
       await axios.put('/epidepartamento',
         {
           "idEpi": sessionStorage.getItem('idEpi'),
@@ -339,9 +339,9 @@ async function alterarEPI() {
             title: 'EPI Alterado com sucesso !',
             showConfirmButton: false,
             timer: 1800
-  
+
           }).then((result) => {
-  
+
             if (result.dismiss === Swal.DismissReason.timer) {
               location.reload()
             }
@@ -356,11 +356,11 @@ async function alterarEPI() {
             title: 'Erro na alteração! Verificar log !',
             showConfirmButton: false,
             timer: 1800
-  
+
           }).then((result) => {
-  
+
             if (result.dismiss === Swal.DismissReason.timer) {
-              document.getElementById('formAltera').reset()           
+              document.getElementById('formAltera').reset()
             }
           })
         })
