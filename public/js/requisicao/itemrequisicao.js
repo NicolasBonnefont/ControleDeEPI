@@ -106,7 +106,7 @@ async function carregaItens() {
   var CodEpi = funcionarioOption[funcionarioIndex].value
   var descricaoEpi = epiOption[epiIndex].text
   var data
-  
+
   if (idAlteracao > 0) {
     document.getElementById('botaoGravar').disabled = false
 
@@ -156,7 +156,7 @@ function itensTabela() {
     })
     $table.bootstrapTable('refresh')
     itens.push($table.bootstrapTable('getData'))
-    sessionStorage.setItem('itens',JSON.stringify(itens))   
+    sessionStorage.setItem('itens',JSON.stringify(itens))
   })
 
   $(function () {
@@ -168,14 +168,24 @@ function itensTabela() {
       var epi = epiOption[epiIndex].value
 
       // função que checa se existe o epi na grid
-      console.log(itens)
-      const verifica = (epi) => {
-       
+
+      var teste = itens.map(item => item.id == epi )
+
+
+      const verifica = () => {
+
         itens.includes(epi) ? alert('EPI já adicionado !') : adionaNaGrid();
       }
 
-      verifica(epi);    
-  
+      verifica(epi);
+
+/*       console.log(verifica)
+      if (verifica){
+        adionaNaGrid()
+      }else{
+        alert('Item ja incluso na lista ! ')
+      } */
+
       function adionaNaGrid() {
         sessionStorage.setItem('itemAlteracao','')
         document.getElementById('botaoGravar').disabled = false
@@ -191,7 +201,6 @@ function itensTabela() {
         })
       }
       itens = JSON.stringify($table.bootstrapTable('getData'))
-      console.log(itens)
       sessionStorage.setItem('itens', itens)
       document.getElementById("selectEPI").selectedIndex = 0
       document.getElementById('descricaoEquipamentos').value = '',
