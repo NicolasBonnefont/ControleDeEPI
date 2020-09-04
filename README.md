@@ -1,4 +1,4 @@
-# Desenvolvido com a finalidade de gerenciar os EPIs dos funcioários.
+# Desenvolvido com a finalidade de gerenciar os EPIs dos funcionários.
 
 Para utilizar a aplicação, siga as instruções a baixo.
 
